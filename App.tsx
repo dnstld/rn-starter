@@ -27,6 +27,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const Section: React.FC<
   PropsWithChildren<{
     title: string;
@@ -35,6 +37,15 @@ const Section: React.FC<
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
+      <Icon.Button
+        name="facebook"
+        backgroundColor="#3b5998"
+        size={21}
+        onPress={() => {}}>
+  
+        <Text> Login with Facebook </Text>
+      </Icon.Button>
+
       <Text
         style={[
           styles.sectionTitle,
