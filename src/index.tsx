@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -9,6 +8,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {
   Provider as PaperProvider,
@@ -22,24 +23,29 @@ const App = () => {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaView>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-      />
+      <SafeAreaProvider>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        />
+        
         <ScrollView
-          contentInsetAdjustmentBehavior="automatic">
-          <View>
+          contentInsetAdjustmentBehavior="automatic"
+          contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <Text style={[styles.highlight, { color: theme.colors.primary }]}>
               RNStarter
             </Text>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </SafeAreaProvider>
     </PaperProvider>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   highlight: {
     fontWeight: '700',
     textAlign: 'center',
