@@ -1,15 +1,5 @@
 import React from 'react';
-
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useColorScheme } from 'react-native';
 
 import {
   Provider as PaperProvider,
@@ -17,39 +7,21 @@ import {
   MD3LightTheme
 } from 'react-native-paper';
 
+import { NavigationContainer } from '@react-navigation/native';
+
+import { Root } from './routes';
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const theme = isDarkMode ? MD3DarkTheme : MD3LightTheme;
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaProvider>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        />
-        
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={[styles.highlight, { color: theme.colors.primary }]}>
-              RNStarter
-            </Text>
-          </View>
-        </ScrollView>
-      </SafeAreaProvider>
+      <NavigationContainer>
+        <Root />
+      </NavigationContainer>
     </PaperProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  highlight: {
-    fontWeight: '700',
-    textAlign: 'center',
-  },
-});
 
 export default App;
